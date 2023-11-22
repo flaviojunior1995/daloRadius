@@ -118,7 +118,7 @@ chown freerad:freerad /etc/freeradius/3.0/mods-enabled/sql
 
 12. Configure security Apache
 ```
-nano /etc/apache2/conf-enable/security.conf
+nano /etc/apache2/conf-enabled/security.conf
 ```
 ```
 ServerTokens Prod  
@@ -135,8 +135,7 @@ expose_php = Off
 
 14. Remove default HTML Page
 ```
-rm -rf /usr/share/apache2/default-site/* 
-rm –rf /var/www/html/* 
+rm -rf /usr/share/apache2/default-site/* /var/www/html/*
 ```
 
 15. Disable the default virtual host:
@@ -158,7 +157,7 @@ systemctl stop mariadb
 ```
 apt install git
 cd /var/www/
-git clone https://github.com/flaviojunior1995/daloRadius
+git clone https://github.com/flaviojunior1995/daloradius
 ```
 
 19. Configure Apache ports:
@@ -184,9 +183,9 @@ cat <<EOF > /etc/apache2/sites-available/operators.conf
 	ServerAdmin operators@localhost
 	ServerName your_domain
 	ServerAlias www.your_domain
-    DocumentRoot /var/www/daloRadius/app/operators
+    DocumentRoot /var/www/daloradius/app/operators
 
-    <Directory /var/www/daloRadius/app/operators>
+    <Directory /var/www/daloradius/app/operators>
 		Options -Indexes +FollowSymLinks
 		AllowOverride None
 		Require all granted
@@ -196,7 +195,7 @@ cat <<EOF > /etc/apache2/sites-available/operators.conf
 		Require all denied
 	</Directory>
 
-	ErrorLog /var/log/apache2/daloRadius/operators/error.log
+	ErrorLog /var/log/apache2/daloradius/operators/error.log
 	CustomLog /var/log/apache2/daloradius/operators/access.log combined
 </VirtualHost>
 EOF
@@ -218,15 +217,15 @@ cat <<EOF > /etc/apache2/sites-available/users.conf
 		Require all denied
 	</Directory>
 
-	ErrorLog \${APACHE_LOG_DIR}/daloradius/users/error.log
-	CustomLog \${APACHE_LOG_DIR}/daloradius/users/access.log combined
+	ErrorLog /var/log/apache2/daloradius/users/error.log
+	CustomLog /var/log/apache2/daloradius/users/access.log combined
 </VirtualHost>
 EOF
 ```
 
 21. Create log directories:
 ```
-mkdir -p /var/log/apache2/daloRadius/{operators,users}
+mkdir -p /var/log/apache2/daloradius/{operators,users}
 ```
 
 22. Enable the created virtual hosts:
@@ -242,26 +241,29 @@ systemctl restart mariadb
 
 24. Import the required SQL files. In this example it is supposed you are using FreeRADIUS 3.
 ```
-mysql -u root radius < /var/www/daloRadius/contrib/db/fr3-mysql-freeradius.sql
-mysql -u root radius < /var/www/daloRadius/contrib/db/mysql-daloradius.sql
+mysql -u root radius < /var/www/daloradius/contrib/db/fr3-mysql-freeradius.sql
+mysql -u root radius < /var/www/daloradius/contrib/db/mysql-daloradius.sql
 ```
 
 25. Clone the sample configuration file
 ```
-cd /var/www/daloRadius/app/common/includes/
+cd /var/www/daloradius/app/common/includes/
 cp daloradius.conf.php.sample daloradius.conf.php
 chown www-data:www-data daloradius.conf.php
 ```
 
 26. Create `var` directory and its subdirectories, then change their ownership:
 ```
-cd /var/www/daloRadius/
+cd /var/www/daloradius/
 mkdir -p var/{log,backup}
 chown -R www-data:www-data var
 ```
 
 22. Edit the configuration file to reflect FreeRADIUS and db configuration. In this example:
 OBS: Change variable <password>
+```
+nano /var/www/daloradius/app/common/includes/daloradius.conf.php
+```
 ```
 $configValues['FREERADIUS_VERSION'] = '3';
 $configValues['CONFIG_DB_ENGINE'] = 'mysqli';
@@ -271,6 +273,7 @@ $configValues['CONFIG_DB_USER'] = 'radius';
 $configValues['CONFIG_DB_PASS'] = '<password>';
 $configValues['CONFIG_DB_NAME'] = 'radius';
 ```
+
 23. Enable and start Apache:
 ```
 systemctl enable apache2
@@ -278,3 +281,18 @@ systemctl restart apache2
 ```
 
 24. Check if the system is working fine just by visiting `http://<ip>:8000/` for the RADIUS management application or `http://<ip>` for the user portal application, default user administrator password radius
+
+25. ADD COLUMN radacct and acctinterval MISSING ON MySQL
+```
+mysql -u root radius -e "ALTER TABLE radacct ADD COLUMN acctupdatetime datetime;"
+mysql -u root radius -e "ALTER TABLE radacct ADD COLUMN acctinterval int(12);"
+mysql -u root radius -e "ALTER TABLE radacct ADD COLUMN framedipv6address varchar(64);"
+mysql -u root radius -e "ALTER TABLE radacct ADD COLUMN framedipv6prefix varchar(64);"
+mysql -u root radius -e "ALTER TABLE radacct ADD COLUMN framedinterfaceid varchar(256);"
+mysql -u root radius -e "ALTER TABLE radacct ADD COLUMN delegatedipv6prefix varchar(64);"
+```
+
+26. To Debug use:
+```
+freeradius -X
+```
