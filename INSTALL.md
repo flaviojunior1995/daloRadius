@@ -16,7 +16,7 @@ apt update
 
 2. Upgrade the system:
 ```
-apt dist-upgrade
+apt upgrade
 ```
 
 3. Install Apache web server:
@@ -282,17 +282,7 @@ systemctl restart apache2
 
 24. Check if the system is working fine just by visiting `http://<ip>:8000/` for the RADIUS management application or `http://<ip>` for the user portal application, default user administrator password radius
 
-25. ADD COLUMN radacct and acctinterval MISSING ON MySQL
-```
-mysql -u root radius -e "ALTER TABLE radacct ADD COLUMN acctupdatetime datetime;"
-mysql -u root radius -e "ALTER TABLE radacct ADD COLUMN acctinterval int(12);"
-mysql -u root radius -e "ALTER TABLE radacct ADD COLUMN framedipv6address varchar(64);"
-mysql -u root radius -e "ALTER TABLE radacct ADD COLUMN framedipv6prefix varchar(64);"
-mysql -u root radius -e "ALTER TABLE radacct ADD COLUMN framedinterfaceid varchar(256);"
-mysql -u root radius -e "ALTER TABLE radacct ADD COLUMN delegatedipv6prefix varchar(64);"
-```
-
-26. To Debug use:
+25. To Debug use:
 ```
 freeradius -X
 ```
