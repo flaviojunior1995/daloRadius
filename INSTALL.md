@@ -45,6 +45,7 @@ mysql_secure_installation
 ```
 
 8. Configure DB FreeRadius:
+OBS: Change variable <password>
 ```
 mysql -u root -e "CREATE DATABASE radius;"
 mysql -u root -e "CREATE USER 'radius'@'localhost' IDENTIFIED BY '<password>';"
@@ -58,6 +59,7 @@ ln -s /etc/freeradius/3.0/mods-available/sql /etc/freeradius/3.0/mods-enabled/
 ```
 
 10. Configure sql FreeRadius
+OBS: Change variable <password>
 ```
 nano /etc/freeradius/3.0/mods-available/sql
 ```
@@ -259,6 +261,7 @@ chown -R www-data:www-data var
 ```
 
 22. Edit the configuration file to reflect FreeRADIUS and db configuration. In this example:
+OBS: Change variable <password>
 ```
 $configValues['FREERADIUS_VERSION'] = '3';
 $configValues['CONFIG_DB_ENGINE'] = 'mysqli';
