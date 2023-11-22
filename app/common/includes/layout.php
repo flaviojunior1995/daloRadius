@@ -606,6 +606,8 @@ function print_table_row($table_row) {
                             //~ "tooltipText" => t('Tooltip','usernameTooltip'),
                             //~ "pattern" => "[a-zA-Z0-9_]+",
                             //~ "disabled" => true,
+							//~ "readonly" => readonly,
+
 
                             //~ "min" => 1|2018-10-30, (type=number|date specific)
                             //~ "max" => 10|2022-01-29, (type=number|date specific)
@@ -691,6 +693,10 @@ function print_input_field($input_descriptor) {
 
     if (array_key_exists('disabled', $input_descriptor) && $input_descriptor['disabled']) {
         echo ' disabled';
+    }
+	
+    if (array_key_exists('readonly', $input_descriptor) && $input_descriptor['readonly']) {
+        echo ' readonly="readonly"';
     }
 
     if (array_key_exists('required', $input_descriptor) && $input_descriptor['required']) {
@@ -780,7 +786,7 @@ function print_input_field($input_descriptor) {
     echo '>';
 
     if (array_key_exists('random', $input_descriptor) && $input_descriptor['random']) {
-        $onclick = sprintf("randomAlphanumeric('%s', 8, '%s')",
+        $onclick = sprintf("randomAlphanumeric('%s', 16, '%s')",
                            $input_descriptor['id'], $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS']);
 
         echo '<span class="input-group-text"><button class="btn btn-link btn-sm" type="button"';

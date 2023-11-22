@@ -132,8 +132,8 @@
             } else {
 
                 // username and password are required
-                if (empty($username) || empty($password)) {
-                    $failureMsg = "username and/or password are empty";
+                if ( empty($username) || empty($password) || empty($email) ) {
+                    $failureMsg = "Username and/or Password and/or Email are empty";
                     $logAction .= "Failed adding (possible empty user/pass) new user [$username] on page: ";
                 } else {
 
@@ -314,7 +314,7 @@
     include_once('include/management/actionMessages.php');
 
     // set navbar stuff
-    $navkeys = array( 'AccountInfo', 'UserInfo', 'BillingInfo' );
+    $navkeys = array( 'AccountInfo', 'UserInfo' );
 
     // print navbar controls
     print_tab_header($navkeys);
@@ -343,7 +343,7 @@
                                     "caption" => t('all','Username'),
                                     "type" => "text",
                                     "value" => "",
-                                    "random" => true,
+                                    "random" => false,
                                     "tooltipText" => t('Tooltip','usernameTooltip')
                                  );
 
@@ -351,17 +351,20 @@
                                     "id" => "password",
                                     "name" => "password",
                                     "caption" => t('all','Password'),
-                                    "type" => $hiddenPassword,
+                                    "type" => "password",
                                     "value" => "",
                                     "random" => true,
-                                    "tooltipText" => t('Tooltip','passwordTooltip')
+                                    "tooltipText" => t('Tooltip','passwordTooltip'),
+									"readonly" => true
                                  );
 
     $input_descriptors0[] = array(
                                     "name" => "passwordType",
                                     "caption" => t('all','PasswordType'),
                                     "options" => $valid_passwordTypes,
-                                    "type" => "select"
+                                    "type" => "hidden",
+									"value" => "Cleartext-Password",
+									"readonly" => true
                                 );
 
     include_once('include/management/populate_selectbox.php');
@@ -388,7 +391,6 @@
 
     // open 1-th fieldset
     $fieldset1_descriptor = array(
-                                    "title" => t('title','Attributes'),
                                  );
 
     open_fieldset($fieldset1_descriptor);
@@ -401,68 +403,11 @@
                                     "value" => dalo_csrf_token(),
                                  );
 
-    $input_descriptors1[] = array(
-                                    "name" => "simultaneoususe",
-                                    "caption" => t('all','SimultaneousUse'),
-                                    "type" => "number",
-                                );
-
-    $input_descriptors1[] = array(
-                                    "name" => "framedipaddress",
-                                    "caption" => t('all','FramedIPAddress'),
-                                    "type" => "text",
-                                    "pattern" => trim(IP_REGEX, "/"),
-                                    "title" => "you should provide a valid IP address"
-                                );
-
-    $input_descriptors1[] = array(
-                                    "id" => "expiration",
-                                    "name" => "expiration",
-                                    "caption" => t('all','Expiration'),
-                                    "type" => "date",
-                                    "min" => date('Y-m-d', strtotime('+1 day')), // tomorrow
-                                );
-
     foreach ($input_descriptors1 as $input_descriptor) {
         print_form_component($input_descriptor);
     }
 
-    $time_values = array(
-                            "0" => "calculate time",
-                            "1" => "seconds",
-                            "60" => "minutes",
-                            "3600" => "hours",
-                            "86400" => "days",
-                            "604800" => "weeks",
-                            "2592000" => "months (30 days)",
-                        );
-
     $select_descriptors = array();
-
-    $select_descriptors[] = array(
-                                    "id" => "sessiontimeout",
-                                    "name" => "sessiontimeout",
-                                    "caption" => t('all','SessionTimeout'),
-                                    "type" => "number",
-                                    "options" => $time_values
-                                 );
-
-    $select_descriptors[] = array(
-                                    "id" => "idletimeout",
-                                    "name" => "idletimeout",
-                                    "caption" => t('all','IdleTimeout'),
-                                    "type" => "number",
-                                    "options" => $time_values
-                                 );
-
-    $select_descriptors[] = array(
-                                "id" => "maxallsession",
-                                "name" => "maxallsession",
-                                "caption" => t('all','MaxAllSession'),
-                                "type" => "number",
-                                "options" => $time_values
-                             );
-
 
     foreach ($select_descriptors as $select_descriptor) {
         print_calculated_select($select_descriptor);
@@ -491,16 +436,9 @@
                        . 'document.newuser.password.value, document.newuser.maxallsession.value);" '
                        . 'class="button">';
     include_once('include/management/userinfo.php');
+	print_form_component($button_descriptor);
 
     close_tab($navkeys, 1);
-
-    // open 2-th tab
-    open_tab($navkeys, 2);
-
-    $customApplyButton = sprintf('<input type="submit" name="submit" value="%s" class="button">', t('buttons','apply'));
-    include_once('include/management/userbillinfo.php');
-
-    close_tab($navkeys, 2);
 
     // close tab wrapper
     close_tab_wrapper();

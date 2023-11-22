@@ -57,14 +57,6 @@ $_input_descriptors0[] = array(
                                 'value' => ((isset($ui_email)) ? $ui_email : ''),
                             );
 
-$_input_descriptors0[] = array(
-                                'id' => 'copycontact',
-                                'name' => 'copycontact',
-                                'caption' => 'Copy contact information to billing',
-                                'type' => 'checkbox',
-                                'onclick' => 'copyUserBillInfo(this)'
-                             );
-
 $_input_descriptors1 = array();
 $_input_descriptors1[] = array( 'id' => 'department', 'caption' => t('ContactInfo','Department'), 'type' => 'text',
                                'value' => ((isset($ui_department)) ? $ui_department : ''), 'name' => 'department' );
