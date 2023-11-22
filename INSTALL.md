@@ -104,11 +104,11 @@ sql {
 
 ...
 
-		#  The only issue is if you have multiple listeners in a
-		#  virtual server, each with a different client list, then
-		#  the SQL clients are added only to the first listener.
-		#
-		read_clients = yes 
+	#  The only issue is if you have multiple listeners in a
+	#  virtual server, each with a different client list, then
+	#  the SQL clients are added only to the first listener.
+	#
+	read_clients = yes 
 ```
 
 11. Change owner sql FreeRadius
