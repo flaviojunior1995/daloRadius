@@ -1,5 +1,5 @@
-# About
 
+# About
 ![daloradius_logo][daloRADIUS_Logo]
 
 [daloRADIUS](http://www.daloradius.com) is an advanced RADIUS web management application aimed at managing hotspots and
@@ -15,7 +15,6 @@ Among other features it implements ACLs, GoogleMaps integration for locating
 hotspots/access points visually and many more features.
 
 ## Contributors
-
 Thanks goes to these wonderful people :
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -34,47 +33,22 @@ Thanks goes to these wonderful people :
 	</tr></table>
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-# Requirements
+## Edited flaviojunior1995
+<a href="https://github.com/flaviojunior1995"><img src="https://avatars.githubusercontent.com/u/53404989?v=4" width="100px;" alt="Flavio Junior"/><br /><sub><b>Flavio Junior</b></sub></a>
 
- * Apache.
- * PHP v5.5 or higher.
- * MySQL v4.1 or higher.
- * [PEAR](https://pear.php.net/) PHP extension.
- * PEAR package DB in order to access the database. To install it, execute at the command line:
-   ```
-   pear install DB
-   ```
- * PEAR packages Mail and Mail_Mime to send notifications by email. To install them, execute at the command line:
-   ```
-   pear install -a Mail
-   pear install -a Mail_Mime
-   ```
+# Requirements
+ * Apache
+ * PHP v8.2 or higher
+ * MySQL v15.1 or higher
 
 More details about installation and requirements can be found if needed on the (maybe very old) files:
 
- * INSTALL
- * INSTALL.openSUSE
- * INSTALL.quick
- * INSTALL.win
+ * [INSTALL.md](https://github.com/flaviojunior1995/daloradius/blob/master/INSTALL.md)
  * FAQS
 
 # Documentation
 
 You can find some documentation in the `doc` directory.
-
-
-
-# daloRADIUS Book
-
-Liran Tal authored a book about working with daloRADIUS covering most aspects through the UI, including setting up a captive portal system.
-## Amazon Paperback Book
-The paperback book version is available through Amazon at http://www.amazon.com/daloRADIUS-User-Guide-Volume-1/dp/1463752199
-
-![daloradius_book][daloRADIUS_Book]
-## PDF Digital Book
-There is also a digital version of the book via PDF, available at: https://lirantal.selz.com/
-
-
 
 # Features
 
@@ -83,8 +57,7 @@ There is also a digital version of the book via PDF, available at: https://liran
 
     * List Users
     * Create New User
-    * Create New User - Quick add
-      easy to use for POS or HotSpot shops
+    * Create New User - Quick add ( For IT Team )
     * Edit User
     * Search User
     * Delete User
