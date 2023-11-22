@@ -49,7 +49,7 @@ mysql_secure_installation
 mysql -u root -e "CREATE DATABASE radius;"
 mysql -u root -e "CREATE USER 'radius'@'localhost' IDENTIFIED BY '<password>';"
 mysql -u root -e "GRANT ALL PRIVILEGES ON radius.* TO 'radius'@'localhost'";
-mysql -u root -p radius < /etc/freeradius/3.0/mods-config/sql/main/mysql/schema.sql 
+mysql -u root radius < /etc/freeradius/3.0/mods-config/sql/main/mysql/schema.sql 
 ```
 
 9. Create ln for sql FreeRadius
@@ -60,7 +60,8 @@ ln -s /etc/freeradius/3.0/mods-available/sql /etc/freeradius/3.0/mods-enabled/
 10. Configure sql FreeRadius
 ```
 nano /etc/freeradius/3.0/mods-available/sql
-'
+```
+```
 sql { 
 
 	dialect = "mysql"
@@ -106,7 +107,6 @@ sql {
         #  the SQL clients are added only to the first listener.
         #
 		read_clients = yes 
-'
 ```
 
 11. Change owner sql FreeRadius
@@ -116,26 +116,24 @@ chown freerad:freerad /etc/freeradius/3.0/mods-enabled/sql
 
 12. Configure security Apache
 ```
-nano /etc/apache2/config-enable/security.conf
-'
+nano /etc/apache2/conf-enable/security.conf
+```
+```
 ServerTokens Prod  
 ServerSignature Off
-'
 ```
 
 13. Configure security PHP
 ```
-nano /etc/php/8.2/cli/php.ini  
-'
+nano /etc/php/8.2/cli/php.ini
+```
+```
 expose_php = Off  
-'
 ```
 
 14. Remove default HTML Page
 ```
 rm -rf /usr/share/apache2/default-site/* 
-```
-```
 rm –rf /var/www/html/* 
 ```
 
@@ -181,45 +179,45 @@ EOF
 ```
 cat <<EOF > /etc/apache2/sites-available/operators.conf
 <VirtualHost *:8000>
-    ServerAdmin operators@localhost
+	ServerAdmin operators@localhost
 	ServerName your_domain
 	ServerAlias www.your_domain
     DocumentRoot /var/www/daloRadius/app/operators
 
     <Directory /var/www/daloRadius/app/operators>
-        Options -Indexes +FollowSymLinks
-        AllowOverride None
-        Require all granted
-    </Directory>
+		Options -Indexes +FollowSymLinks
+		AllowOverride None
+		Require all granted
+	</Directory>
 
-    <Directory /var/www/daloradius>
-        Require all denied
-    </Directory>
+	<Directory /var/www/daloradius>
+		Require all denied
+	</Directory>
 
-    ErrorLog /var/log/apache2/daloRadius/operators/error.log
-    CustomLog /var/log/apache2/daloradius/operators/access.log combined
+	ErrorLog /var/log/apache2/daloRadius/operators/error.log
+	CustomLog /var/log/apache2/daloradius/operators/access.log combined
 </VirtualHost>
 EOF
 
 cat <<EOF > /etc/apache2/sites-available/users.conf
 <VirtualHost *:80>
-    ServerAdmin users@localhost
+	ServerAdmin users@localhost
 	ServerName your_domain
 	ServerAlias www.your_domain
-    DocumentRoot /var/www/daloradius/app/users
+	DocumentRoot /var/www/daloradius/app/users
 
-    <Directory /var/www/daloradius/app/users>
-        Options -Indexes +FollowSymLinks
-        AllowOverride None
-        Require all granted
-    </Directory>
+	<Directory /var/www/daloradius/app/users>
+		Options -Indexes +FollowSymLinks
+		AllowOverride None
+		Require all granted
+	</Directory>
 
-    <Directory /var/www/daloradius>
-        Require all denied
-    </Directory>
+	<Directory /var/www/daloradius>
+		Require all denied
+	</Directory>
 
-    ErrorLog \${APACHE_LOG_DIR}/daloradius/users/error.log
-    CustomLog \${APACHE_LOG_DIR}/daloradius/users/access.log combined
+	ErrorLog \${APACHE_LOG_DIR}/daloradius/users/error.log
+	CustomLog \${APACHE_LOG_DIR}/daloradius/users/access.log combined
 </VirtualHost>
 EOF
 ```
@@ -242,8 +240,8 @@ systemctl restart mariadb
 
 24. Import the required SQL files. In this example it is supposed you are using FreeRADIUS 3.
 ```
-mysql -u root raddb < /var/www/daloRadius/contrib/db/fr3-mysql-freeradius.sql
-mysql -u root raddb < /var/www/daloRadius/contrib/db/mysql-daloradius.sql
+mysql -u root radius < /var/www/daloRadius/contrib/db/fr3-mysql-freeradius.sql
+mysql -u root radius < /var/www/daloRadius/contrib/db/mysql-daloradius.sql
 ```
 
 25. Clone the sample configuration file
@@ -256,7 +254,7 @@ chown www-data:www-data daloradius.conf.php
 26. Create `var` directory and its subdirectories, then change their ownership:
 ```
 cd /var/www/daloRadius/
-mkdir var/{log,backup}
+mkdir -p var/{log,backup}
 chown -R www-data:www-data var
 ```
 
