@@ -41,7 +41,7 @@ function check_service($service_name) {
     return $result_code === 0;
 }
 
-$services_to_check = array("FreeRADIUS", "MySQL", "MariaDB", "SSHd");
+$services_to_check = array("FreeRADIUS", "MariaDB", "SSHd");
 
 $table = array( 'title' => 'Service Status', 'rows' => array() );
 
