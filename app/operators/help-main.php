@@ -52,7 +52,8 @@
         However, the daloRADIUS packages here are old, so it is better to use the ones on GitHub.</p></li>
         <li><p><strong>daloRADIUS Mailing List:</strong> you can send an email to <a class="text-decoration-none" href="mailto:daloradius-users@lists.sourceforge.net">daloradius-users@lists.sourceforge.net</a>,<br>
         but registration to the mailing list is required first. You can register <a class="text-decoration-none" href="https://lists.sourceforge.net/lists/listinfo/daloradius-users" target="_blank">here</a>.</p></li>
-        <li><strong>daloRADIUS IRC:</strong> You can find us at <a class="text-decoration-none" href="irc://irc.freenode.net/daloradius" target="_blank">#daloradius</a> on irc.freenode.net.</li>
+        <li><strong>daloRADIUS IRC:</strong> You can find us at <a class="text-decoration-none" href="irc://irc.freenode.net/daloradius" target="_blank">#daloradius</a> on irc.freenode.net.</p></li>
+        <li><strong>daloRADIUS edited flaviojunior1995:</strong> You can find this fork at <a class="text-decoration-none" href="https://github.com/flaviojunior1995/daloradius" target="_blank">Github</a>.</li>
     </ul>
 
 <?php
