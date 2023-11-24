@@ -38,6 +38,8 @@
     $param_label = array(
                             'CONFIG_MAIL_SMTPADDR' => t('all','SMTPServerAddress'),
                             'CONFIG_MAIL_SMTPPORT' => t('all','SMTPServerPort'),
+							'CONFIG_MAIL_SMTPAUTH' => t('all','SMTPServerUser'),
+							'CONFIG_MAIL_SMTPPASS' => t('all','SMTPServerPassword'),
                             'CONFIG_MAIL_SMTPFROM' => t('all','SMTPServerFromEmail'),
                         );
 
@@ -45,7 +47,9 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (array_key_exists('csrf_token', $_POST) && isset($_POST['csrf_token']) && dalo_check_csrf_token($_POST['csrf_token'])) {
-
+			
+			$configValues['CONFIG_MAIL_SMTPAUTH'] = trim($_POST['CONFIG_MAIL_SMTPAUTH']);
+			$configValues['CONFIG_MAIL_SMTPPASS'] = trim($_POST['CONFIG_MAIL_SMTPPASS']);
             // validate email
             if (
                     array_key_exists('CONFIG_MAIL_SMTPFROM', $_POST) &&
@@ -134,6 +138,22 @@
                                                     ? $configValues['CONFIG_MAIL_SMTPPORT'] : ""),
                                         "min" => 0,
                                         "max" => 65535
+                                 );
+								 
+    $input_descriptors0[] = array(
+                                        "type" => "text",
+                                        "caption" => t('all','SMTPServerUser'),
+                                        "name" => 'CONFIG_MAIL_SMTPAUTH',
+                                        "value" => ( !array_key_exists('CONFIG_MAIL_SMTPAUTH', $invalid_input)
+                                                    ? $configValues['CONFIG_MAIL_SMTPAUTH'] : ""),
+                                 );
+		 
+    $input_descriptors0[] = array(
+                                        "type" => "password",
+                                        "caption" => t('all','SMTPServerPassword'),
+                                        "name" => 'CONFIG_MAIL_SMTPPASS',
+                                        "value" => (!array_key_exists('CONFIG_MAIL_SMTPPASS', $invalid_input)
+                                                    ? $configValues['CONFIG_MAIL_SMTPPASS'] : ""),
                                  );
 
     $input_descriptors0[] = array(

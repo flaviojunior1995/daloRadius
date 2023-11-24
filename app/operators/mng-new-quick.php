@@ -32,6 +32,14 @@
     include("../common/includes/layout.php");
     include_once("include/management/functions.php");
 
+    require_once('include/phpMailer/src/PHPMailer.php');
+    require_once('include/phpMailer/src/SMTP.php');
+    require_once('include/phpMailer/src/Exception.php');
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
     // init logging variables
     $log = "visited page: ";
     $logAction = "";
@@ -97,7 +105,7 @@
                                ? '1' : '0';
             $ui_enableUserPortalLogin = (!empty($ui_PortalLoginPassword) && isset($_POST['enableUserPortalLogin']) && $_POST['enableUserPortalLogin'] === '1')
                                       ? '1' : '0';
-									  
+
             include('../common/includes/db_open.php');
 
             // check if username is already present in the radcheck table
@@ -113,6 +121,9 @@
                     $failureMsg = "Username and/or Password and/or Email are empty";
                     $logAction .= "Failed adding (possible empty user/pass) new user [$username] on page: ";
                 } else {
+
+
+
 
                     // we "inject" specified attribute in the $_POST array.
                     // handleAttributes() - called later - will take care of it.
@@ -202,15 +213,59 @@
 
                     $addedUserInfo = (add_user_info($dbSocket, $username, $params)) ? "stored" : "nothing to store";
 
+					// Send e-mail afeter user creation
+					$mail = new PHPMailer;
+					$mail->isSMTP();
+					$mail->Host = $configValues['CONFIG_MAIL_SMTPADDR'];
+					$mail->Port = $configValues['CONFIG_MAIL_SMTPPORT'];
+					$mail->SMTPAuth = true;
+					$mail->SMTPSecure = "tls";
+					$mail->SMTPOptions = array(
+						'ssl' => array(
+							'verify_peer' => false,
+							'verify_peer_name' => false,
+							'allow_self_signeed' => true
+						)
+					);
+					$mail->Username = $configValues['CONFIG_MAIL_SMTPAUTH'];
+					$mail->Password = $configValues['CONFIG_MAIL_SMTPPASS'];
+					$mail->setFrom($configValues['CONFIG_MAIL_SMTPFROM'], '');
+					$mail->addAddress($_POST['email'], '');
+					if ($mail->addReplyTo($_POST['email'], $_POST['name'])) {
+						$mail->IsHTML(true);
+						$mail->Subject = 'RADIUS credentials';
+						$mail->AddEmbeddedImage('../common/static/images/daloradius_small.jpg', 'logoimg', 'daloRadius.jpg' );
+						$mail->Body = <<<EOT
+						<p><img src="cid:logoimg" /></p>
+						<h1>Radius Credentials</h1>
+						User: {$_POST['username']} <br>
+						Password: {$_POST['password']}
+						EOT;
+					}
+					
+					if (!$mail->send()) {
                     $successMsg = 'Inserted new <strong>user</strong>: '
                                 . sprintf('<a href="mng-edit.php?username=%s" title="Edit">%s</a>', $username_enc, $username_enc)
                                 . '<ul style="color: black">'
                                 . sprintf("<li><strong>attributes count</strong>: %d</li>", $attributesCount)
                                 . sprintf("<li><strong>groups count</strong>: %d</li>", $groupsCount)
                                 . sprintf("<li><strong>user info</strong>: %s</li>", $addedUserInfo)
+                                . sprintf("<li><strong>e-mail send to $email</strong>: failure</li>")
                                 . "</ul>";
+					} else {
+                    $successMsg = 'Inserted new <strong>user</strong>: '
+                                . sprintf('<a href="mng-edit.php?username=%s" title="Edit">%s</a>', $username_enc, $username_enc)
+                                . '<ul style="color: black">'
+                                . sprintf("<li><strong>attributes count</strong>: %d</li>", $attributesCount)
+                                . sprintf("<li><strong>groups count</strong>: %d</li>", $groupsCount)
+                                . sprintf("<li><strong>user info</strong>: %s</li>", $addedUserInfo)
+                                . sprintf("<li><strong>e-mail send to $email</strong>: successfully</li>")
+                                . "</ul>";
+					}
 
                     $logAction .= sprintf("Successfully inserted new user [%s] on page: ", $username);
+					
+
 
                 } // if (empty($username) || empty($password)) {
 
@@ -382,4 +437,6 @@
 
     include('include/config/logging.php');
     print_footer_and_html_epilogue();
+	
+
 ?>

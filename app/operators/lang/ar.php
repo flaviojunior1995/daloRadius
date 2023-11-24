@@ -74,6 +74,8 @@ $l['all']['DashboardDelayHard'] = "Time in minutes to consider a 'hard' delay li
 $l['all']['SendWelcomeNotification'] = "إرسال إشعار ترحيبي";
 $l['all']['SMTPServerAddress'] = "SMTP Server Address";
 $l['all']['SMTPServerPort'] = "SMTP Server Port";
+$l['all']['SMTPServerUser'] = "SMTP User";
+$l['all']['SMTPServerPassword'] = "SMTP Password";
 $l['all']['SMTPServerFromEmail'] = "From Email Address";
 
 $l['all']['customAttributes'] = "سمة-صفة مخصصة";

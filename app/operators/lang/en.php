@@ -68,11 +68,12 @@ $l['all']['DashboardDebug'] = "Debug";
 $l['all']['DashboardDelaySoft'] = "Time in minutes to consider a 'soft' delay limit";
 $l['all']['DashboardDelayHard'] = "Time in minutes to consider a 'hard' delay limit";
 
-
-
 $l['all']['SendWelcomeNotification'] = "Send Welcome Notification";
+
 $l['all']['SMTPServerAddress'] = "SMTP Server Address";
 $l['all']['SMTPServerPort'] = "SMTP Server Port";
+$l['all']['SMTPServerUser'] = "SMTP User";
+$l['all']['SMTPServerPassword'] = "SMTP Password";
 $l['all']['SMTPServerFromEmail'] = "From Email Address";
 
 $l['all']['customAttributes'] = "Custom Attributes";
