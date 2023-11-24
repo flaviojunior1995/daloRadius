@@ -32,7 +32,6 @@ $nav = array(
                 "mng"    => array( 'Managment', 'mng-main.php', ),
                 "rep"    => array( 'Reports', 'rep-main.php', ),
                 "acct"   => array( 'Accounting', 'acct-main.php', ),
-                "bill"   => array( 'Billing', 'bill-main.php', ),
                 "gis"    => array( 'Gis', 'gis-main.php', ),
                 "graphs" => array( 'Graphs', 'graphs-main.php', ),
                 "config" => array( 'Config', 'config-main.php', ),

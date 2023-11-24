@@ -70,17 +70,6 @@ $subnav["help"] = array();
 // gis subnav elements
 $subnav["gis"] = array();
 
-// bill subnav elements
-$subnav["bill"] = array(
-                            'POS' => 'bill-pos.php',
-                            'Plans' => 'bill-plans.php',
-                            'Rates' => 'bill-rates.php',
-                            'Merchant-Transactions' => 'bill-merchant.php',
-                            'Billing-History' => 'bill-history.php',
-                            'Invoices' => 'bill-invoice.php',
-                            'Payments' => 'bill-payments.php',
-                        );
-
 // acct subnav elements
 $subnav["acct"] = array(
                             'General' => 'acct-main.php',
