@@ -58,7 +58,6 @@ $subnav["rep"] = array(
 // mng subnav elements
 $subnav["mng"] = array(
                             'Users' => 'mng-users.php',
-                            'Batch Users' => 'mng-batch.php',
                             'Hotspots' => 'mng-hs.php',
                             'Nas' => 'mng-rad-nas.php',
                             'User-Groups' => 'mng-rad-usergroup.php',
