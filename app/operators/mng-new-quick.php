@@ -97,30 +97,7 @@
                                ? '1' : '0';
             $ui_enableUserPortalLogin = (!empty($ui_PortalLoginPassword) && isset($_POST['enableUserPortalLogin']) && $_POST['enableUserPortalLogin'] === '1')
                                       ? '1' : '0';
-
-            // billing info variables
-            $bi_contactperson = (array_key_exists('bi_contactperson', $_POST) && isset($_POST['bi_contactperson'])) ? $_POST['bi_contactperson'] : "";
-            $bi_company = (array_key_exists('bi_company', $_POST) && isset($_POST['bi_company'])) ? $_POST['bi_company'] : "";
-            $bi_email = (array_key_exists('bi_email', $_POST) && isset($_POST['bi_email'])) ? $_POST['bi_email'] : "";
-            $bi_phone = (array_key_exists('bi_phone', $_POST) && isset($_POST['bi_phone'])) ? $_POST['bi_phone'] : "";
-            $bi_address = (array_key_exists('bi_address', $_POST) && isset($_POST['bi_address'])) ? $_POST['bi_address'] : "";
-            $bi_city = (array_key_exists('bi_city', $_POST) && isset($_POST['bi_city'])) ? $_POST['bi_city'] : "";
-            $bi_state = (array_key_exists('bi_state', $_POST) && isset($_POST['bi_state'])) ? $_POST['bi_state'] : "";
-            $bi_country = (array_key_exists('bi_country', $_POST) && isset($_POST['bi_country'])) ? $_POST['bi_country'] : "";
-            $bi_zip = (array_key_exists('bi_zip', $_POST) && isset($_POST['bi_zip'])) ? $_POST['bi_zip'] : "";
-            $bi_paymentmethod = (array_key_exists('bi_paymentmethod', $_POST) && isset($_POST['bi_paymentmethod'])) ? $_POST['bi_paymentmethod'] : "";
-            $bi_cash = (array_key_exists('bi_cash', $_POST) && isset($_POST['bi_cash'])) ? $_POST['bi_cash'] : "";
-            $bi_creditcardname = (array_key_exists('bi_creditcardname', $_POST) && isset($_POST['bi_creditcardname'])) ? $_POST['bi_creditcardname'] : "";
-            $bi_creditcardnumber = (array_key_exists('bi_creditcardnumber', $_POST) && isset($_POST['bi_creditcardnumber'])) ? $_POST['bi_creditcardnumber'] : "";
-            $bi_creditcardverification = (array_key_exists('bi_creditcardverification', $_POST) && isset($_POST['bi_creditcardverification'])) ? $_POST['bi_creditcardverification'] : "";
-            $bi_creditcardtype = (array_key_exists('bi_creditcardtype', $_POST) && isset($_POST['bi_creditcardtype'])) ? $_POST['bi_creditcardtype'] : "";
-            $bi_creditcardexp = (array_key_exists('bi_creditcardexp', $_POST) && isset($_POST['bi_creditcardexp'])) ? $_POST['bi_creditcardexp'] : "";
-            $bi_notes = (array_key_exists('bi_notes', $_POST) && isset($_POST['bi_notes'])) ? $_POST['bi_notes'] : "";
-
-            // this is forced to 0 (disabled) if user portal login password is empty
-            $bi_changeuserbillinfo = (!empty($ui_PortalLoginPassword) && isset($_POST['bi_changeuserbillinfo']) && $_POST['bi_changeuserbillinfo'] === '1')
-                                   ? '1' : '0';
-
+									  
             include('../common/includes/db_open.php');
 
             // check if username is already present in the radcheck table
@@ -225,56 +202,12 @@
 
                     $addedUserInfo = (add_user_info($dbSocket, $username, $params)) ? "stored" : "nothing to store";
 
-                    // adding billing info
-                    $params = array(
-                                        //~ "planName" => $planName,
-                                        "contactperson" => $bi_contactperson,
-                                        "company" => $bi_company,
-                                        "email" => $bi_email,
-                                        "phone" => $bi_phone,
-                                        "address" => $bi_address,
-                                        "city" => $bi_city,
-                                        "state" => $bi_state,
-                                        "country" => $bi_country,
-                                        "zip" => $bi_zip,
-                                        "postalinvoice" => $bi_postalinvoice,
-                                        "faxinvoice" => $bi_faxinvoice,
-                                        "emailinvoice" => $bi_emailinvoice,
-
-                                        "paymentmethod" => $bi_paymentmethod,
-                                        "cash" => $bi_cash,
-                                        "creditcardname" => $bi_creditcardname,
-                                        "creditcardnumber" => $bi_creditcardnumber,
-                                        "creditcardverification" => $bi_creditcardverification,
-                                        "creditcardtype" => $bi_creditcardtype,
-                                        "creditcardexp" => $bi_creditcardexp,
-
-                                        "lead" => $bi_lead,
-                                        "coupon" => $bi_coupon,
-                                        "ordertaker" => $bi_ordertaker,
-
-                                        "notes" => $bi_notes,
-                                        "changeuserbillinfo" => $bi_changeuserbillinfo,
-
-                                        //~ "billstatus" => $bi_billstatus,
-                                        //~ "lastbill" => $bi_lastbill,
-                                        //~ "nextbill" => $bi_nextbill,
-                                        "billdue" => $bi_billdue,
-                                        "nextinvoicedue" => $bi_nextinvoicedue,
-
-                                        "creationdate" => $currDate,
-                                        "creationby" => $currBy,
-                                   );
-
-                    $addedBillingInfo = (add_user_billing_info($dbSocket, $username, $params)) ? "stored" : "nothing to store";
-
                     $successMsg = 'Inserted new <strong>user</strong>: '
                                 . sprintf('<a href="mng-edit.php?username=%s" title="Edit">%s</a>', $username_enc, $username_enc)
                                 . '<ul style="color: black">'
                                 . sprintf("<li><strong>attributes count</strong>: %d</li>", $attributesCount)
                                 . sprintf("<li><strong>groups count</strong>: %d</li>", $groupsCount)
                                 . sprintf("<li><strong>user info</strong>: %s</li>", $addedUserInfo)
-                                . sprintf("<li><strong>billing info</strong>: %s</li>", $addedBillingInfo)
                                 . "</ul>";
 
                     $logAction .= sprintf("Successfully inserted new user [%s] on page: ", $username);
