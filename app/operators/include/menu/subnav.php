@@ -51,7 +51,6 @@ $subnav["rep"] = array(
                             'General' => 'rep-main.php',
                             'Logs' => 'rep-logs.php',
                             'Status' => 'rep-stat.php',
-                            'Batch Users' => 'rep-batch.php',
                             'Dashboard' => 'rep-hb.php',
                         );
 
