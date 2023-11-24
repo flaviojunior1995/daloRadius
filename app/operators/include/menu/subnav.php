@@ -67,9 +67,6 @@ $subnav["mng"] = array(
 // help subnav elements
 $subnav["help"] = array();
 
-// gis subnav elements
-$subnav["gis"] = array();
-
 // acct subnav elements
 $subnav["acct"] = array(
                             'General' => 'acct-main.php',
