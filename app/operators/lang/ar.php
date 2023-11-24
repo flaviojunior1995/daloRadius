@@ -34,7 +34,8 @@ $l['all']['daloRADIUS'] = sprintf("daloRADIUS %s", $configValues['DALORADIUS_VER
 $l['all']['daloRADIUSVersion'] = sprintf("version %s ", $configValues['DALORADIUS_VERSION']);
 $l['all']['copyright1'] = 'راديوس الإدارة وإعداد التقارير والمحاسبة والفواتير <a target="_blank" href="https://github.com/lirantal/daloradius">Liran Tal</a>';
 $l['all']['copyright2'] = 'حقوق نشر دالوراديوس 2007-2023 بواسطة <a target="_blank" href="https://github.com/lirantal/daloradius">Liran Tal</a>.<br>'
-                        . 'تم تطوير دالوراديوس يواسطة <a target="_blank" href="https://github.com/filippolauria">Filippo Lauria</a>.';
+                        . 'تم تطوير دالوراديوس يواسطة <a target="_blank" href="https://github.com/filippolauria">Filippo Lauria</a>.<br>'
+						. 'تم تطوير دالوراديوس يواسطة <a target="_blank" href="https://github.com/flaviojunior1995">Flavio Junior</a>.';
 $l['all']['ID'] = "مسلسل";
 $l['all']['PoolName'] = "IP حوض";
 $l['all']['CalledStationId'] = "ماك نقطة الوصول";

@@ -35,6 +35,7 @@ $l['all']['daloRADIUSVersion'] = sprintf("版本 %s ", $configValues['DALORADIUS
 $l['all']['copyright1'] = 'RADIUS 管理、报告、会计和账单 <a target="_blank" href="https://github.com/lirantal/daloradius">Liran Tal</a>';
 $l['all']['copyright2'] = 'daloRADIUS - Copyright &copy; 2007-' . date('Y') . ' by <a target="_blank" href="https://github.com/lirantal/daloradius">Liran Tal</a>.<br>'
                         . 'daloRADIUS has been enhanced by <a target="_blank" href="https://github.com/filippolauria">Filippo Lauria</a>.<br>'
+						. 'daloRADIUS has been edited by <a target="_blank" href="https://github.com/flaviojunior1995">Flavio Junior</a>.<br>'
                         . 'Chinese language pack produced by SanDuo';
 
 $l['all']['ID'] = "ID";
