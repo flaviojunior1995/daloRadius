@@ -24,6 +24,8 @@
 
 include(__DIR__ . '/version.php');
 
+$configValues['DALORADIUS_VERSION'] = '2.0 beta';
+$configValues['DALORADIUS_DATE'] = 'edited flaviojunior1995';
 $configValues['FREERADIUS_VERSION'] = '3';
 $configValues['CONFIG_DB_ENGINE'] = 'mysqli';
 $configValues['CONFIG_DB_HOST'] = 'localhost';
