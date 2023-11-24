@@ -85,7 +85,6 @@ $subnav["bill"] = array(
 $subnav["acct"] = array(
                             'General' => 'acct-main.php',
                             'Custom' => 'acct-custom.php',
-                            'Hotspot' => 'acct-hotspot.php',
                             'Maintenance' => 'acct-maintenance.php',
                         );
 
