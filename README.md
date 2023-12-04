@@ -239,6 +239,7 @@ grant or revoke them of permissions to access different pages.
  * ajax auto complete - Batur Orkun <batur@bilkent.edu.tr>
  * dhtml-Suite - Magne Kalleland <post@dhtmlgoodies.com>
  * dompdf - [https://github.com/dompdf](https://github.com/dompdf)
+ * PHPMailer - [https://github.com/PHPMailer/PHPMailer](https://github.com/PHPMailer/PHPMailer)
 
 # Support
 
