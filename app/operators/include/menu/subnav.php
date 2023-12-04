@@ -51,13 +51,11 @@ $subnav["rep"] = array(
                             'General' => 'rep-main.php',
                             'Logs' => 'rep-logs.php',
                             'Status' => 'rep-stat.php',
-                            'Dashboard' => 'rep-hb.php',
                         );
 
 // mng subnav elements
 $subnav["mng"] = array(
                             'Users' => 'mng-users.php',
-                            'Hotspots' => 'mng-hs.php',
                             'Nas' => 'mng-rad-nas.php',
                             'User-Groups' => 'mng-rad-usergroup.php',
                             'Profiles' => 'mng-rad-profiles.php',
