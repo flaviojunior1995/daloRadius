@@ -118,7 +118,7 @@ You can find some documentation in the `doc` directory.
     * Top Users
       View a report of the Top Users based on their Bandwidth consumption or Time usage
       
-![daloRadius_Reports](https://github.com/flaviojunior1995/daloradius/blob/master/assents/im7.png?raw=true)
+![daloRadius_Reports](https://github.com/flaviojunior1995/daloradius/blob/master/assents/img7.png?raw=true)
 
 ### Logs Reporting
 
