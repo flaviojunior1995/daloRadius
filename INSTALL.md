@@ -183,9 +183,9 @@ cat <<EOF > /etc/apache2/sites-available/operators.conf
 	ServerAdmin operators@localhost
 	ServerName your_domain
 	ServerAlias www.your_domain
-    DocumentRoot /var/www/daloradius/app/operators
+	DocumentRoot /var/www/daloradius/app/operators
 
-    <Directory /var/www/daloradius/app/operators>
+	<Directory /var/www/daloradius/app/operators>
 		Options -Indexes +FollowSymLinks
 		AllowOverride None
 		Require all granted
