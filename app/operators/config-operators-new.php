@@ -246,7 +246,7 @@
         open_tab($navkeys, 2);
 
         include_once('include/management/operator_acls.php');
-        drawOperatorACLs();
+        drawOperatorACLsNEW();
 
         close_tab($navkeys, 2);
 
