@@ -153,11 +153,13 @@ systemctl stop apache2
 systemctl stop mariadb
 ```
 
-18. Git daloRadius edited flaviojunior1995:
+18. Install daloRadius edited flaviojunior1995:
 ```
-apt install git
-cd /var/www/
-git clone https://github.com/flaviojunior1995/daloradius
+apt install unzip
+cd /tmp
+wget https://github.com/flaviojunior1995/daloradius/releases/download/v2.0.1b_v1/daloradius-v2.0.1beta_edited-v1.zip
+unzip [daloradius-v2.0.1beta_edited-v1.zip](https://github.com/flaviojunior1995/daloradius/releases/download/v2.0.1b_v1/daloradius-v2.0.1beta_edited-v1.zip)
+cp -R daloradius/* /var/www/html/
 ```
 
 19. Configure Apache ports:
